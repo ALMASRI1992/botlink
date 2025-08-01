@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LinkedIn Auto Apply</title>
+  <style>
+    * { box-sizing:border-box;margin:0;padding:0 }
+    body {
+      font-family: Arial, sans-serif;
+      padding:16px;
+      width:320px;
+      background:#f7f9fc;
+      color:#333;
+    }
+    h2 {
+      text-align:center;
+      margin-bottom:12px;
+      color:#0a66c2;
+      font-size:18px;
+    }
+    label { display:block; margin-bottom:8px; font-size:13px; }
+    input {
+      width:100%;
+      padding:6px 8px;
+      font-size:14px;
+      border:1px solid #ccc;
+      border-radius:4px;
+      margin-top:4px;
+      transition:border-color .2s;
+    }
+    input.input-error { border-color:#c32f27; }
+    .with-btn { display:flex; align-items:center; }
+    .with-btn input { flex:1; }
+    .with-btn button {
+      margin-left:6px;
+      padding:6px;
+      font-size:14px;
+      border:none;
+      background:#ddd;
+      border-radius:4px;
+      cursor:pointer;
+      transition:background .2s;
+    }
+    .with-btn button:hover { background:#ccc; }
+    #delaySecInput,#autoRunSecInput {
+      margin-bottom:12px;
+    }
+    #countdown {
+      font-size:13px;
+      color:#555;
+      margin-bottom:12px;
+      min-height:1.2em;
+    }
+    button#applyButton {
+      width:100%;
+      padding:10px;
+      font-size:15px;
+      background:#0a66c2;
+      color:#fff;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      transition:background .2s;
+      margin-top:8px;
+    }
+    button#applyButton:hover { background:#084d9f; }
+    #status {
+      margin-top:12px;
+      font-size:13px;
+      min-height:1.2em;
+      word-break:break-word;
+    }
+    .loading { color:#555; display:flex; align-items:center; }
+    .success { color:#2e7d32; }
+    .error   { color:#c32f27; }
+
+    /* Spinner */
+    .spinner {
+      width:16px;height:16px;
+      border:2px solid #ccc;
+      border-top:2px solid #0a66c2;
+      border-radius:50%;
+      margin-right:8px;
+      animation:spin .8s linear infinite;
+    }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  </style>
+</head>
+<body>
+
+  <!-- ► PAYMENT / LICENSE SECTION ◄ -->
+  <div id="paySection">
+    <button id="subscribeBtn">Subscribe for Full Access (€10/mo)</button>
+    <p style="margin-top:8px; font-size:13px;">
+      Have a license key?
+      <input id="licenseInput" type="text" placeholder="Enter license" style="width: 150px; display:inline-block;">
+      <button id="submitLicense" style="display:inline-block; padding:4px 8px; font-size:13px;">Unlock</button>
+    </p>
+    <hr style="margin:12px 0;">
+  </div>
+
+  <!-- ► MAIN FORM ◄ -->
+  <h2>LinkedIn Auto Apply</h2>
+
+  <label>First Name
+    <input id="firstName" type="text" placeholder="e.g. Jane">
+  </label>
+
+  <label>Last Name
+    <input id="lastName" type="text" placeholder="e.g. Doe">
+  </label>
+
+  <label>Specialty
+    <input id="specialty" type="text" placeholder="e.g. Data Engineer">
+  </label>
+
+  <label>Years of Experience
+    <div class="with-btn">
+      <input id="experienceYears" type="number" min="0" placeholder="e.g. 3">
+      <button id="autoFillBtn" title="Auto-fill saved values">⚙️</button>
+    </div>
+  </label>
+
+  <label>Delay before start (seconds)
+    <input id="delaySecInput" type="number" min="0" value="0">
+  </label>
+
+  <label>Auto-run every (seconds)
+    <input id="autoRunSecInput" type="number" min="0" value="0" placeholder="e.g. 3600">
+  </label>
+
+  <div id="countdown"></div>
+
+  <label>LinkedIn Email
+    <input id="email" type="email" placeholder="you@mail.com">
+  </label>
+
+  <label>LinkedIn Password
+    <input id="password" type="password" placeholder="••••••••">
+  </label>
+
+  <label>Search URL
+    <input id="urlSearch" type="url" placeholder="https://www.linkedin.com/...">
+  </label>
+
+  <button id="applyButton">Start Auto-Apply Now</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
