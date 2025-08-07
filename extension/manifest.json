@@ -2,25 +2,19 @@
   "manifest_version": 3,
   "name": "LinkedIn Auto Apply",
   "version": "1.0",
-  "description": "Automate LinkedIn job applications via a Python API",
+  "description": "Automate LinkedIn job applications via Python API",
   "permissions": [
-    "activeTab",
     "storage",
     "alarms"
   ],
   "host_permissions": [
-    "http://127.0.0.1:5000/*",
-    "https://yourdomain.com/*"
+    "https://autoapply-linkedin-f058600e4815.herokuapp.com/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon.jpg",
-      "48": "icon.jpg",
-      "128": "icon.jpg"
-    }
+    "default_icon": "icon.jpg"
   }
 }
