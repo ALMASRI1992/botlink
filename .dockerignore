@@ -1,0 +1,11 @@
+.git
+.venv
+node_modules
+*.log
+*.tmp
+*.bak
+*.zip
+*.tar
+*.rar
+*.db
+*.pyc

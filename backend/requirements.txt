@@ -1,0 +1,6 @@
+requests==2.26.0
+flask>=2.0.0
+werkzeug>=2.0.0
+flask-cors==3.0.10  # valid version
+selenium==4.0.0  # or the version you want
+webdriver-manager==3.5.0  # or the version you want

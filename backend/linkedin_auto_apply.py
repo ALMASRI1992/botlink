@@ -1,43 +1,57 @@
 
-# linkedin_auto_apply.py
-#def run_apply():
-# linkedin_auto_apply.py
-
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait  # Correct import
+from selenium.webdriver.support import expected_conditions as EC  # Correct import
 
 def create_driver():
-    options = Options()
-    # use the built-in headless flag
-    options.headless = True
-    # specify a window size so pages render correctly
-    options.add_argument("--window-size=1920x1080")
+    chrome_options = Options()
+   # chrome_options.add_argument('--headless')  # Run Chrome in headless mode
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
 
-    # do *not* pass any other arguments—no disable-gpu, no no-sandbox, no experimental flags
-    return webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options
-    )
+    # Use the latest driver version (works without passing any version)
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    
+    return driver
 
-def run_apply(first_name, last_name, specialty,
-              experience, LINKEDIN_EMAIL, LINKEDIN_PASSWORD,
-              url_search):
-    """
-    Exécute ta logique Selenium : connexion LinkedIn, scroll, Easy Apply, etc.
-    Retourne un tuple (success: bool, message: str).
-    """
+def run_apply(first_name, last_name, specialty, experience_years, linkedin_email, linkedin_password, url_search):
+    #driver = create_driver()
+
     try:
+        '''
+        driver.get("https://www.linkedin.com/login")
+
+        # Wait until the 'username' field is present and fill in the email
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username"))).send_keys(linkedin_email)
+
+        # Fill in the password
+        driver.find_element(By.ID, "password").send_keys(linkedin_password)
+
+        # Submit the form
+        driver.find_element(By.XPATH, "//button[@type='submit']").click()
+
+        print("Logged into LinkedIn successfully")
+
+        # Wait for the LinkedIn homepage to load before navigating to the search URL
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Search']")))
+
+        # Navigate to the job search URL
+        driver.get(url_search)
+
         # ==== COPIE-COLLE ICI TON CODE ENTIER, sauf la partie "driver.quit()" à la fin ====
         # Par exemple :
-
+'''
         #https://www.linkedin.com/jobs/collections/recommended/?currentJobId=4258713313
-        from selenium import webdriver
-        from selenium.webdriver.common.by import By
+        #from selenium import webdriver
+        #from selenium.webdriver.common.by import By
         from selenium.webdriver.common.keys import Keys
-        from selenium.webdriver.support.ui import WebDriverWait
-        from selenium.webdriver.support import expected_conditions as EC
+       # from selenium.webdriver.support.ui import WebDriverWait
+        #from selenium.webdriver.support import expected_conditions as EC
         from selenium.webdriver.chrome.service import Service
         from selenium.webdriver.chrome.options import Options
         from selenium.webdriver.support.ui import Select
@@ -45,30 +59,12 @@ def run_apply(first_name, last_name, specialty,
         import time
         import random
 
-
-
-        from selenium import webdriver
-        from selenium.webdriver.common.by import By
-        from selenium.webdriver.common.keys import Keys
-        from selenium.webdriver.support.ui import WebDriverWait
-        from selenium.webdriver.support import expected_conditions as EC
-        from selenium.webdriver.chrome.service import Service
-        from selenium.webdriver.chrome.options import Options
-        from selenium.webdriver.support.ui import Select
-        from webdriver_manager.chrome import ChromeDriverManager
-        import time
-        import random
-
-
-
-
-
-
+ 
 
 
         from selenium.webdriver.common.action_chains import ActionChains
-        from selenium.webdriver.support import expected_conditions as EC
-        from selenium.webdriver.common.by import By
+        
+         
 
         def select_binary_labels(modal, driver):
             try:
@@ -173,13 +169,6 @@ def run_apply(first_name, last_name, specialty,
 
 
 
-        
-
-
-
-
-
-
 
 
 
@@ -191,7 +180,7 @@ def run_apply(first_name, last_name, specialty,
         options.add_experimental_option('useAutomationExtension', False)
         options.add_argument('--disable-blink-features=AutomationControlled')
 
-        service = Service(ChromeDriverManager().install())
+        #service = Service(ChromeDriverManager(version="139.0.7258").install())
         #driver = webdriver.Chrome(service=service, options=options)
         driver = create_driver()
 
@@ -201,8 +190,8 @@ def run_apply(first_name, last_name, specialty,
         #LINKEDIN_PASSWORD = "Masri71854415"
 
         driver.get("https://www.linkedin.com/login")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username"))).send_keys(LINKEDIN_EMAIL)
-        driver.find_element(By.ID, "password").send_keys(LINKEDIN_PASSWORD)
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username"))).send_keys(linkedin_email)
+        driver.find_element(By.ID, "password").send_keys(linkedin_password)
         driver.find_element(By.XPATH, "//button[@type='submit']").click()
         print("  Connexion LinkedIn réussie")
 
